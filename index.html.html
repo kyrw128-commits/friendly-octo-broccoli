@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الرعاية الطبية والتمريض المنزلي المتقدم</title>
+    
+    <style>
+        /* Base Styles & CSS Variables */
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #052c65;
+            --accent-color: #d63384;
+            --danger-color: #dc3545;
+            --light-bg: #f8f9fa;
+            --dark-text: #212529;
+            --card-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease-in-out;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.7;
+        }
+
+        /* Navigation Bar */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(5, 44, 101, 0.9), rgba(13, 110, 253, 0.85)), 
+                        url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0b5ed7;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(13, 110, 253, 0.4);
+        }
+
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        .btn-danger:hover {
+            background-color: #bb2d3b;
+            transform: translateY(-3px);
+        }
+
+        /* Sections Styling */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+
+        /* Emergency Section */
+        .emergency-banner {
+            background: #fff3f2;
+            border-right: 6px solid var(--danger-color);
+            border-radius: 12px;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .emergency-info h3 {
+            color: var(--danger-color);
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 16px;
+            padding: 35px 25px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.03);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-color);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .service-card h3 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .service-card ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        .service-card ul li {
+            position: relative;
+            padding-right: 20px;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: #495057;
+        }
+
+        .service-card ul li::before {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* CV & Credentials Section */
+        .cv-wrapper {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .cv-wrapper { grid-template-columns: 1fr; }
+        }
+
+        .cv-profile {
+            text-align: center;
+            border-left: 1px solid #eee;
+            padding-left: 20px;
+        }
+
+        .profile-avatar {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: #e9ecef;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            border: 4px solid var(--primary-color);
+        }
+
+        .cv-details h3 {
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--light-bg);
+            padding-bottom: 8px;
+            margin: 20px 0 15px;
+        }
+
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background: #e7f1ff;
+            color: var(--primary-color);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        /* Booking Form */
+        .booking-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.6); }
+            70% { box-shadow: 0 0 0 15px rgba(220, 53, 69, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">🩺 CarePlus | الرعاية التمريضية</div>
+            <ul class="nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#emergency">الطوارئ</a></li>
+                <li><a href="#services">الخدمات</a></li>
+                <li><a href="#cv">الخبرات الاعتمادية</a></li>
+                <li><a href="#book">حجز خدمة</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>رعاية تمريضية منزلية بمواصفات طبية عالمية</h1>
+            <p>نقدم أفضل خدمات التمريض الرعاية الخاصة، التعامل مع الحالات الحرجة، ومتابعة ما بعد العمليات الجراحية على أيدي متخصصين معتمدين.</p>
+            <div class="cta-buttons">
+                <a href="#book" class="btn btn-primary">طلب خدمة تمريضية</a>
+                <a <a href="tel:01000000000" class="btn btn-danger">اتصل بالطوارئ فوراً 📞</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Section -->
+    <section id="emergency">
+        <div class="emergency-banner">
+            <div class="emergency-info">
+                <h3>قسم الرعاية العاجلة والحالات الحرجة</h3>
+                <p>نوفر التدخل التمريضي السريع للحالات المستعجلة، تركيب الرايل، القسطرة، ومتابعة الأكسجين على مدار 24 ساعة.</p>
+            </div>
+            <a href="tel:01000000000" class="btn btn-danger">اتصل بالطوارئ فوراً 📞</a>
+        </div>
+    </section>
+
+    <!-- Nursing Services Section -->
+    <section id="services">
+        <div class="section-header">
+            <h2>خدمات التمريض والرعاية المنزلية</h2>
+            <p>خدمات شاملة مصممة لضمان راحة المريض وسلامته داخل المنزل</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🩹</div>
+                <h3>العناية بالجروح المعقدة</h3>
+                <ul>
+                    <li>غيار معقم على الجروح الجراحية</li>
+                    <li>علاج وغيار القدم السكري</li>
+                    <li>متابعة وتطهير قرح الفراش</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">💉</div>
+                <h3>المحاليل والإجراءات الوريدية</h3>
+                <ul>
+                    <li>إعطاء الأدوية والمحاليل الوريدية</li>
+                    <li>سحب العينات للتحاليل الطبية</li>
+                    <li>تركيب الكانيولا بدقة عالية</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🫀</div>
+                <h3>متابعة المؤشرات الحيوية</h3>
+                <ul>
+                    <li>قياس ومتابعة ضغط الدم والسكر</li>
+                    <li>قياس نسبة الأكسجين والتنفس</li>
+                    <li>إعداد تقارير دورية للطبيب المعالج</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">👨‍🦳</div>
+                <h3>رعاية كبار السن والشفتات</h3>
+                <ul>
+                    <li>شفتات تمريضية (8 / 12 / 24 ساعة)</li>
+                    <li>متابعة أدوية الأمراض المزمنة</li>
+                    <li>تركيب ومتابعة القسطرة والرايل</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CV Section -->
+    <section id="cv">
+        <div class="section-header">
+            <h2>الملف المهني والخبرات (CV)</h2>
+            <p>مؤهلات وخبرات رعايه تمريضيه المسؤول عن تقديم الخدمة</p>
+        </div>
+
+        <div class="cv-wrapper">
+            <div class="cv-profile">
+                <div class="profile-avatar">👨‍⚕️</div>
+                <h2>ممرض</h2>
+                <p style="color: #6c757d;">توفير رعاية تمريضية منزلية وعناية مركزة</p>
+                <div style="margin-top: 15px;">
+                    <span class="tag">ترخيص مزاولة المهنة</span>
+                    <span class="tag">خبره+ 6 شهور</span>
+                </div>
+            </div>
+
+            <div class="cv-details">
+                <h3>🎓 المؤهلات العلمية والاعتمادات</h3>
+                <p>• بكالوريوس العلوم التمريضية - ممرض معتمد.</p>
+                <p>• شهادة الإنعاش القلبي الرئوي الأساسي (BLS) المعتمدة.</p>
+
+                <h3>💼 الخبرات العملية</h3></p>
+                <p>• خبرة واسعة في إدارة خطط الرعاية التمريضية المنزلية المتقدمة.</p>
+
+                <h3>💡 المهارات الطبية والتمريضية</h3>
+                <div class="skills-tags" style="margin-top: 10px;">
+                    <span class="tag">إدارة أجهزة التنفس</span>
+                    <span class="tag">العناية بالقسطرة والرايل</span>
+                    <span class="tag">التعقيم ومكافحة العدوى</span>
+                    <span class="tag">التعامل مع الحالات الحرجة</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Form Section -->
+    <section id="book">
+        <div class="section-header">
+            <h2>طلب خدمة أو استشارة تمريضية</h2>
+            <p>قم بتعبئة البيانات وسنتواصل معك فوراً لتأكيد الموعد</p>
+        </div>
+
+        <div class="booking-container">
+            <form id="nursingForm" onsubmit="submitForm(event)">
+                <div class="form-group">
+                    <label for="name">اسم المريض / المتقدم بالطلب:</label>
+                    <input type="text" id="name" class="form-control" placeholder="أدخل الاسم بالكامل" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">رقم الهاتف للتواصل:</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="01xxxxxxxxx" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="service">الخدمة المطلوبة:</label>
+                    <select id="service" class="form-control" required>
+                        <option value="">اختر الخدمة...</option>
+                        <option value="emergency">🚨 حالة طوارئ / رعاية عاجلة</option>
+                        <option value="wound">غيار على الجروح / القدم السكري</option>
+                        <option value="iv">إعطاء محاليل / حقن وريدية</option>
+                        <option value="shift">شفت تمريض منزلي (رعاية كبار سن)</option>
+                        <option value="vital">متابعة علامات حيوية وقسطرة/رايل</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="details">تفاصيل الحالة المرضية (اختياري):</label>
+                    <textarea id="details" class="form-control" rows="4" placeholder="اكتب أي معلومات عن حالة المريض الطبية..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">إرسال طلب الخدمة 🚀</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>جميع الحقوق محفوظة © 2026 | مركز الرعاية والتمريض المنزلي المتقدم</p>
+    </footer>
+
+    <!-- JavaScript Interactivity -->
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const service = document.getElementById('service').value;
+
+            alert(`شكراً لك أ/ ${name}.\nتم استلام طلبك لخدمة (${service}) بنجاح.\nسيتم الاتصال بك على الرقم (${phone}) فوراً لتأكيد الموعد.`);
+            
+            document.getElementById('nursingForm').reset();
+        }
+    </script>
+</body>
+</html>
